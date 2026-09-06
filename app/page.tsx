@@ -22,8 +22,6 @@ async function getFeaturedCourses(): Promise<Course[]> {
   }
 }
 
-// Illustrative chapter stack for the hero — not live data, just the shape
-// of what a course actually looks like once you open it.
 const PRINCIPLES = [
   { n: "01", label: "Why arrays are contiguous", width: 92 },
   { n: "02", label: "Indexes: how lookups get fast", width: 76 },

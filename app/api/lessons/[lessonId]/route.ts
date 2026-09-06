@@ -16,8 +16,6 @@ export async function GET(
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  // Fetch the lesson along with its chapter -> course, so we know
-  // which course this lesson belongs to (needed for the enrollment check).
   const { data: lesson, error } = await supabase
     .from("lessons")
     .select(
@@ -46,8 +44,6 @@ export async function GET(
     return NextResponse.json({ error: "Lesson not found" }, { status: 404 });
   }
 
-  // Enforce enrollment — logged in isn't enough, they must own an
-  // enrollment row for the course this lesson belongs to.
   const { data: enrollment } = await supabase
     .from("enrollments")
     .select("id")
@@ -68,7 +64,9 @@ export async function GET(
     .eq("course_id", courseId)
     .order("position", { ascending: true })
     .order("position", { referencedTable: "lessons", ascending: true })
-    .returns<{ position: number; lessons: { id: string; position: number } }[]>();
+    .returns<
+      { position: number; lessons: { id: string; position: number } }[]
+    >();
 
   if (courseLessonsError) {
     return NextResponse.json(
@@ -85,7 +83,6 @@ export async function GET(
         : [lessons.id];
     }) ?? [];
 
-  // Fetch this user's completion status for the lesson
   const { data: progress } = await supabase
     .from("lesson_progress")
     .select("completed")

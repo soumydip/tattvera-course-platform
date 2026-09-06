@@ -44,9 +44,6 @@ components/
 lib/
   supabase/server.ts                Server Supabase client
   get-base-url.ts                   Absolute URL helper for server-side fetches to our own API
-supabase/
-  schema.sql                        Tables, RLS policies, triggers, storage bucket
-  seed.sql                          Dummy courses/chapters/lessons for testing
 middleware.ts                       Route protection + session refresh
 ```
 
@@ -55,7 +52,7 @@ middleware.ts                       Route protection + session refresh
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/<your-username>/tattvera-course-platform.git
+git clone https://github.com/soumydip/tattvera-course-platform
 cd tattvera-course-platform
 ```
 
@@ -81,13 +78,6 @@ Fill in the values — see the table below for where each one comes from.
 | `NEXT_PUBLIC_SITE_URL`                        | Your deployed URL (optional locally)                                   |
 | `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` | Stripe Dashboard, test mode (bonus)                                    |
 | `ARCJET_KEY`                                  | Arcjet Dashboard (bonus)                                               |
-
-### 4. Set up the database
-
-In the Supabase SQL editor, run in order:
-
-1. `supabase/schema.sql` — tables, RLS policies, the profile-creation trigger, avatar storage bucket
-2. `supabase/seed.sql` — dummy courses so `/courses` isn't empty
 
 ### 5. Enable GitHub OAuth
 

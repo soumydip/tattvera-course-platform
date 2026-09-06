@@ -19,7 +19,7 @@ export function MarkCompleteButton({ lessonId, initialComplete }: Props) {
   async function toggle() {
     const next = !completed;
     setLoading(true);
-    setCompleted(next); // optimistic
+    setCompleted(next);
 
     const res = await fetch("/api/lessons/complete", {
       method: "POST",
@@ -34,8 +34,6 @@ export function MarkCompleteButton({ lessonId, initialComplete }: Props) {
     }
 
     setLoading(false);
-    // Refresh so the course page's progress bar and "up next" marker
-    // reflect this change next time it's visited.
     router.refresh();
   }
 

@@ -27,7 +27,6 @@ export function EnrollButton({
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
 
-  // Not logged in — send them to login, then back to this course
   if (!isLoggedIn) {
     return (
       <Link href={`/login?next=/courses/${courseId}`}>
@@ -36,7 +35,7 @@ export function EnrollButton({
     );
   }
 
-  // Already enrolled — go straight to the next lesson that's pending,
+  // Already enrolled - go straight to the next lesson that's pending,
   // or back to the first one if the course is already finished.
   if (isEnrolled) {
     const href = nextLessonId
