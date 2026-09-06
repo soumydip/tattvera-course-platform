@@ -33,13 +33,15 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6">
         <Link
           href="/"
-          className="group flex items-center gap-2 font-[family-name:var(--font-rajdhani)] text-xl font-semibold tracking-tight"
+          className="group flex items-center gap-2 font-(family-name:--font-rajdhani) text-xl font-semibold tracking-tight"
           onClick={() => setIsMenuOpen(false)}
         >
           <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground shadow-sm transition-transform group-hover:rotate-3">
             T
           </span>
-          <span>Tattvera<span className="text-secondary-foreground">.</span></span>
+          <span>
+            Tattvera<span className="text-secondary-foreground">.</span>
+          </span>
         </Link>
         <button
           type="button"
@@ -50,7 +52,9 @@ export function SiteHeader() {
         >
           {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
-        <nav className={`${isMenuOpen ? "flex" : "hidden"} absolute inset-x-4 top-[4.5rem] flex-col gap-2 rounded-2xl border border-border bg-card p-3 shadow-xl md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none`}>
+        <nav
+          className={`${isMenuOpen ? "flex" : "hidden"} absolute inset-x-4 top-18 flex-col gap-2 rounded-2xl border border-border bg-card p-3 shadow-xl md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none`}
+        >
           <Link
             href="/courses"
             onClick={() => setIsMenuOpen(false)}
@@ -67,11 +71,22 @@ export function SiteHeader() {
               >
                 Dashboard
               </Link>
+              <Link
+                href="/profile"
+                onClick={() => setIsMenuOpen(false)}
+                className={`rounded-lg px-3 py-2 text-sm transition-colors hover:bg-muted hover:text-foreground md:px-0 md:py-1 md:hover:bg-transparent ${pathname === "/profile" ? "font-medium text-foreground" : "text-muted-foreground"}`}
+              >
+                Profile
+              </Link>
               <span className="hidden h-4 w-px bg-border md:block" />
               <SignOutButton />
             </>
           ) : (
-            <Link href="/login" onClick={() => setIsMenuOpen(false)} className="md:ml-1">
+            <Link
+              href="/login"
+              onClick={() => setIsMenuOpen(false)}
+              className="md:ml-1"
+            >
               <Button variant="outline" size="sm" className="w-full md:w-auto">
                 Log in <ArrowUpRight className="size-3.5" />
               </Button>
