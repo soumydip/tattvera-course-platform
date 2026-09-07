@@ -25,8 +25,8 @@ export async function GET() {
   }
 
   const { data: profile, error } = await supabase
-    .from("profiles")
-    .select("id, full_name, bio, avatar_url")
+    .from("users")
+    .select("id, name:full_name, bio, avatar_url")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -67,16 +67,16 @@ export async function PATCH(request: Request) {
 
   const updates = {
     id: user.id,
-    full_name: result.data.full_name ?? null,
+    name: result.data.full_name ?? null,
     bio: result.data.bio ?? null,
     avatar_url: result.data.avatar_url ?? null,
     updated_at: new Date().toISOString(),
   };
 
   const { data: profile, error } = await supabase
-    .from("profiles")
+    .from("users")
     .upsert(updates)
-    .select("id, full_name, bio, avatar_url")
+    .select("id, name:full_name, bio, avatar_url")
     .single();
 
   if (error) {
