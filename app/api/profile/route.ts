@@ -26,7 +26,7 @@ export async function GET() {
 
   const { data: profile, error } = await supabase
     .from("users")
-    .select("id, name:full_name, bio, avatar_url")
+    .select("id, full_name:name, bio, avatar_url")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -76,7 +76,7 @@ export async function PATCH(request: Request) {
   const { data: profile, error } = await supabase
     .from("users")
     .upsert(updates)
-    .select("id, name:full_name, bio, avatar_url")
+    .select("id, full_name:name, bio, avatar_url")
     .single();
 
   if (error) {
