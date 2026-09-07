@@ -66,7 +66,6 @@ export async function PATCH(request: Request) {
   }
 
   const updates = {
-    id: user.id,
     name: result.data.full_name ?? null,
     bio: result.data.bio ?? null,
     avatar_url: result.data.avatar_url ?? null,
@@ -75,7 +74,8 @@ export async function PATCH(request: Request) {
 
   const { data: profile, error } = await supabase
     .from("users")
-    .upsert(updates)
+    .update(updates)
+    .eq("id", user.id)
     .select("id, full_name:name, bio, avatar_url")
     .single();
 
